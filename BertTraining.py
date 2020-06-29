@@ -1,3 +1,9 @@
+import os
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
+
+
 import pandas as pd
 import numpy as np
 import pickle
@@ -15,12 +21,6 @@ from BertDataReader import DataReader
 from log_conf import Logger
 
 DATAPATH = 'data/'
-
-import os
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-
 
 class BertTraining:
     def __init__(self, ):
