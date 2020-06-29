@@ -12,6 +12,7 @@ from sentence_transformers.readers import *
 import re
 
 from BertDataReader import DataReader
+from log_conf import Logger
 
 DATAPATH = 'data/'
 
@@ -46,32 +47,21 @@ class BertTraining:
     def load_data(self, data_path=DATAPATH):
         self.df1 = pd.read_csv(data_path + "product_df.csv")
         self.df1.columns = [0, 1, 2]
+        Logger.logger.info("[INFO] Datasets1 for BERT training is loaded.")
 
         self.df2 = pd.read_csv("data/function_df.csv")
         self.df2.columns = [0, 1, 2]
+        Logger.logger.info("[INFO] Datasets2 for BERT training is loaded.")
+        
 
         # training data
         self.train_data1 = SentencesDataset(self.reader.get_examples(self.df1, modelname='model_1'), model=self.model1)
         self.train_dataloader1 = DataLoader(self.train_data1, shuffle=True, batch_size=self.batch_size)
-
+        Logger.logger.info("[INFO] First loader initialized")
         # training data
         self.train_data2 = SentencesDataset(self.reader.get_examples(self.df2, modelname='model_2'), model=self.model2)
         self.train_dataloader2 = DataLoader(self.train_data2, shuffle=True, batch_size=self.batch_size)
-
-        # val data
-        fold = int(len(self.df1) * 0.95)
-        dev_data = SentencesDataset(self.reader.get_examples(self.df1[fold:], modelname='model_1'), model=self.model1)
-        dev_dataloader = DataLoader(dev_data, shuffle=False, batch_size=self.batch_size)
-        self.evaluator1 = EmbeddingSimilarityEvaluator(dev_dataloader)
-
-        # val data
-        fold = int(len(self.df2) * 0.95)
-        dev_data = SentencesDataset(self.reader.get_examples(self.df2[fold:], modelname='model_2'), model=self.model2)
-        dev_dataloader = DataLoader(dev_data, shuffle=False, batch_size=self.batch_size)
-        self.evaluator2 = EmbeddingSimilarityEvaluator(dev_dataloader)
-
-
-
+        Logger.logger.info("[INFO] Second loader initialized")
     def fit(self, ):
         # Configure the training
         num_epochs = 1
@@ -79,9 +69,7 @@ class BertTraining:
             len(self.train_dataloader1) * num_epochs / self.batch_size * 0.1)  # 10% of train data for warm-up
         # Train the model
         self.model1.fit(train_objectives=[(self.train_dataloader1, self.train_loss1)],
-                        evaluator=self.evaluator1,
-                        epochs=num_epochs,
-                        evaluation_steps=100,
+                       epochs=num_epochs,
                        warmup_steps=warmup_steps,
                        output_path=self.model_save_path1
                        )
@@ -91,14 +79,12 @@ class BertTraining:
             len(self.train_dataloader2) * num_epochs / self.batch_size * 0.1)  # 10% of train data for warm-up
 
         self.model2.fit(train_objectives=[(self.train_dataloader2, self.train_loss2)],
-                        evaluator=self.evaluator2,
-                        epochs=num_epochs,
-                        evaluation_steps=100,
+                       epochs=num_epochs,
                        warmup_steps=warmup_steps,
                        output_path=self.model_save_path2
                        )
 
-    def get_embeddings(self, input_f='data/train_only_text.pickle', output_f='train_bert_7.pickle'):
+    def get_embeddings(self, input_f='data/train_only_text.pkl', output_f='train_bert_7.pickle'):
         with open(input_f, 'rb') as f:
             train = pickle.load(f)
 
