@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import pickle
 import math
+from datetime import datetime
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import models, losses
 from torch.utils.data import DataLoader
@@ -25,10 +26,10 @@ class BertTraining:
         self.batch_size = 16
         self.reader = DataReader('')
 
-        self.model_save_path1 = 'model_dump' + self.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        self.model_save_path1 = 'model_dump' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         self.model1 = SentenceTransformer('bert-base-nli-mean-tokens')
 
-        self.model_save_path2 = 'model_2_dump' + self.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        self.model_save_path2 = 'model_2_dump' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         self.model2 = SentenceTransformer('bert-base-nli-mean-tokens')
 
         self.train_loss1 = losses.CosineSimilarityLoss(model=self.model1)
