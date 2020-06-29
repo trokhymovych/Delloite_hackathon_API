@@ -60,7 +60,7 @@ class BertTraining:
 
         # val data
         fold = int(len(self.df1) * 0.95)
-        dev_data = SentencesDataset(self.reader.get_examples(self.df1[fold:], modelname='model_1'), model=self.model\1)
+        dev_data = SentencesDataset(self.reader.get_examples(self.df1[fold:], modelname='model_1'), model=self.model1)
         dev_dataloader = DataLoader(dev_data, shuffle=False, batch_size=self.batch_size)
         self.evaluator1 = EmbeddingSimilarityEvaluator(dev_dataloader)
 
