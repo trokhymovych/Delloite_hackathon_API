@@ -58,6 +58,20 @@ class BertTraining:
         self.train_data2 = SentencesDataset(self.reader.get_examples(self.df2, modelname='model_2'), model=self.model2)
         self.train_dataloader2 = DataLoader(self.train_data2, shuffle=True, batch_size=self.batch_size)
 
+        # val data
+        fold = int(len(self.df1) * 0.95)
+        dev_data = SentencesDataset(self.reader.get_examples(self.df1[fold:], modelname='model_1'), model=self.model\1)
+        dev_dataloader = DataLoader(dev_data, shuffle=False, batch_size=self.batch_size)
+        self.evaluator1 = EmbeddingSimilarityEvaluator(dev_dataloader)
+
+        # val data
+        fold = int(len(self.df2) * 0.95)
+        dev_data = SentencesDataset(self.reader.get_examples(self.df2[fold:], modelname='model_2'), model=self.model2)
+        dev_dataloader = DataLoader(dev_data, shuffle=False, batch_size=self.batch_size)
+        self.evaluator2 = EmbeddingSimilarityEvaluator(dev_dataloader)
+
+
+
     def fit(self, ):
         # Configure the training
         num_epochs = 1
@@ -65,8 +79,9 @@ class BertTraining:
             len(self.train_dataloader1) * num_epochs / self.batch_size * 0.1)  # 10% of train data for warm-up
         # Train the model
         self.model1.fit(train_objectives=[(self.train_dataloader1, self.train_loss1)],
-                       epochs=num_epochs,
-                       evaluation_steps=100,
+                        evaluator=self.evaluator1,
+                        epochs=num_epochs,
+                        evaluation_steps=100,
                        warmup_steps=warmup_steps,
                        output_path=self.model_save_path1
                        )
@@ -76,8 +91,9 @@ class BertTraining:
             len(self.train_dataloader2) * num_epochs / self.batch_size * 0.1)  # 10% of train data for warm-up
 
         self.model2.fit(train_objectives=[(self.train_dataloader2, self.train_loss2)],
-                       epochs=num_epochs,
-                       evaluation_steps=100,
+                        evaluator=self.evaluator2,
+                        epochs=num_epochs,
+                        evaluation_steps=100,
                        warmup_steps=warmup_steps,
                        output_path=self.model_save_path2
                        )
