@@ -40,8 +40,8 @@ class RandomForestModel:
     def model_fit(self,):
 
         # first level model
-        y_1 = y.apply(self._first_level_target)
-        X_1 = X[columns_1]
+        y_1 = self.y.apply(self._first_level_target)
+        X_1 = self.X[self.columns_1]
 
         clf1 = RandomForestClassifier(n_estimators=200,
                                       min_samples_split=10,
@@ -53,8 +53,8 @@ class RandomForestModel:
         clf1 = clf1.fit(X_1, y_1)
 
         # second level model
-        y_2 = y[y.apply(self._first_level_target).astype(bool)]
-        X_2 = X[y.apply(self._first_level_target).astype(bool)][columns_2]
+        y_2 = self.y[self.y.apply(self._first_level_target).astype(bool)]
+        X_2 = self.X[self.y.apply(self._first_level_target).astype(bool)][self.columns_2]
 
         clf2 = RandomForestClassifier(n_estimators=200,
                                       min_samples_split=10,
@@ -70,21 +70,23 @@ class RandomForestModel:
         self.model2 = clf2
 
 
-    def model_predict(self, X, models, columns_1, columns_2):
-        # first level model
-        X_1 = X[columns_1]
+    def model_predict(self, X):
 
-        preds1 = models[0].predict(X_1)
+        # first level model
+        X_1 = X[self.columns_1]
+
+        preds1 = self.model1.predict(X_1)
         zero_ids = X[~preds1.astype(bool)].id
 
         res0 = pd.DataFrame({'id': zero_ids, 'target': [0 for i in range(len(zero_ids))]})
 
         # second level model
-        X_2 = X[preds1.astype(bool)][columns_2]
+        X_2 = X[preds1.astype(bool)][self.columns_2]
 
-        preds2 = models[1].predict(X_2)
+        preds2 = self.model2.predict(X_2)
 
         ones_ids = X[preds1.astype(bool)][preds2 == 1].id
+
         res1 = pd.DataFrame({'id': ones_ids, 'target': [1 for i in range(len(ones_ids))]})
 
         two_ids = X[preds1.astype(bool)][preds2 == 2].id
