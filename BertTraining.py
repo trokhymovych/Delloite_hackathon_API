@@ -1,9 +1,3 @@
-import os
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-
-
 import pandas as pd
 import numpy as np
 import pickle
@@ -27,10 +21,10 @@ class BertTraining:
         self.batch_size = 16
         self.reader = DataReader('')
 
-        self.model_save_path1 = 'model_dump' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        self.model_save_path1 = DATAPATH + 'model_dump' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         self.model1 = SentenceTransformer('bert-base-nli-mean-tokens')
 
-        self.model_save_path2 = 'model_2_dump' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        self.model_save_path2 = DATAPATH + 'model_2_dump' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         self.model2 = SentenceTransformer('bert-base-nli-mean-tokens')
 
         self.train_loss1 = losses.CosineSimilarityLoss(model=self.model1)
@@ -49,7 +43,7 @@ class BertTraining:
         self.df1.columns = [0, 1, 2]
         Logger.logger.info("[INFO] Datasets1 for BERT training is loaded.")
 
-        self.df2 = pd.read_csv("data/function_df.csv")
+        self.df2 = pd.read_csv(data_path + "function_df.csv")
         self.df2.columns = [0, 1, 2]
         Logger.logger.info("[INFO] Datasets2 for BERT training is loaded.")
         
@@ -101,7 +95,7 @@ class BertTraining:
                        output_path=self.model_save_path2
                        )
 
-    def get_embeddings(self, input_f='data/train_only_text.pkl', output_f='train_bert_7.pkl'):
+    def get_embeddings(self, input_f='data/train_only_text.pkl', output_f='data/train_bert_7.pkl'):
         with open(input_f, 'rb') as f:
             train = pickle.load(f)
 
