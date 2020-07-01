@@ -25,14 +25,14 @@ Our solution is based on Two-level random forest model based on finetuned bert e
 - ... to be discussed
 
 
-##API for model calls
+## API for model calls
 ### start api
 ```
 python3 API.py
 ```
 ![alt text](https://github.com/trokhymovych/DelloiteCompanyAcceptance/blob/master/Screenshots/API.png?raw=true)
 
-##Basic UI for model demo
+## Basic UI for model demo
 ##### Start web application
 ```cmd
 cd web_application
