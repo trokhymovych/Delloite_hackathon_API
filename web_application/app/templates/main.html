@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<h2 style="color: #6d9eeb; margin-left: 0.5em;">AI consulting</h2>
+
+
+
+<form method=POST enctype=multipart/form-data style="margin-top: -1em;">
+<div class="col-sm-4" >
+
+  <p style="margin-top:1em; font-size: 1em;color:#434343">Criteria for acceptance by function</p>
+  <input type="text" name="accepted_function" class="form-control" id="accepted_function" placeholder="" style="max-width: 36em; font-size:1em;" value="{{dict_for_search['accepted_function']}}">
+  <p style="margin-top:1em; font-size: 1em;color:#434343">Criteria for rejection by function</p>
+  <input type="text" name="rejected_function" class="form-control" id="rejected_function" placeholder="" style="max-width: 36em; font-size:1em;" value="{{dict_for_search['rejected_function']}}">
+
+</div>
+
+<div class="col-sm-4">
+
+  <p style="margin-top:1em; font-size: 1em; color:#434343">Criteria for acceptance by product</p>
+  <input type="text" name="accepted_product" class="form-control" id="accepted_product" placeholder="" style="max-width: 36em; font-size:1em;" value="{{dict_for_search['accepted_product']}}">
+  <p style="margin-top:1em; font-size: 1em; color:#434343">Criteria for rejection by product</p>
+  <input type="text" name="rejected_product" class="form-control" id="rejected_product" placeholder="" style="max-width: 36em; font-size:1em;" value="{{dict_for_search['rejected_product']}}">
+
+
+</div>
+
+
+<div class="col-sm-4">
+
+  <p style="margin-top:1em; font-size: 1em;color:#434343">Company page</p>
+  <input type="text" name="company_page" class="form-control" id="company_page" placeholder="" style="max-width: 24em; " value="{{dict_for_search['company_page']}}">
+
+  <input type=submit class="btn-blue btn" value="Preview" style="margin-top: 2.5em;" name="btn"  id="btn">
+</div>
+
+
+
+{%if show_submit%}
+<iframe src="{{dict_for_search['company_page']}}" frameborder=0 style="width: 100%; height:30em; margin-top:2em;"></iframe>
+
+<div style="margin-top: 1em;">
+  <input type=submit class="btn-blue btn" value="Evaluate" name="btn" id="btn" style="display: inline-block;">
+
+
+  {%if answer_dict["show_answer"]%}
+  <h3 style="color:{{answer_dict['color']}};  display: inline-block; margin-left: 3em;">{{answer_dict['text']}}</h3>
+
+  {%endif%}
+</div>
+
+{%endif%}
+</form>
+
+{% endblock %}

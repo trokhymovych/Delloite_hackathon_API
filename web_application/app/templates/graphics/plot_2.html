@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.0.2"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300, "stroke": "transparent", "strokeWidth": 0}, "axis": {"domainColor": "transparent", "labelColor": "#434343", "tickColor": "transparent", "titleFont": "Arial"}, "axisX": {"domainDash": [4, 2], "labelAngle": 0, "labelFontSize": 12, "labelPadding": 8, "titleAngle": 0}, "axisY": {"domainColor": "transparent", "labelFontSize": 12, "titleAlign": "left", "titleAngle": 0, "titleColor": "#434343", "titleFontSize": 14, "titleFontWeight": "normal", "titleX": -55, "titleY": -20}, "title": {"color": "#434343", "dy": -10, "font": "Arial", "fontSize": 20}}, "layer": [{"mark": {"type": "line", "color": "lightgrey"}, "encoding": {"tooltip": [{"type": "nominal", "field": "\u041c\u0456\u0441\u044f\u0446\u044c"}, {"type": "quantitative", "field": "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a"}], "x": {"type": "nominal", "field": "\u041c\u0456\u0441\u044f\u0446\u044c", "sort": {"field": "month", "order": "ascending"}, "title": ""}, "y": {"type": "quantitative", "axis": {"grid": true, "gridColor": "lightgray", "gridDash": [4, 2]}, "field": "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a", "scale": {"domain": [5000, 10000], "zero": false}, "title": "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a"}}}, {"mark": {"type": "circle", "color": "#6d9eeb", "size": 80}, "encoding": {"tooltip": [{"type": "nominal", "field": "\u041c\u0456\u0441\u044f\u0446\u044c"}, {"type": "quantitative", "field": "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a"}], "x": {"type": "nominal", "field": "\u041c\u0456\u0441\u044f\u0446\u044c", "sort": {"field": "month", "order": "ascending"}}, "y": {"type": "quantitative", "field": "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a", "title": "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a"}}}], "data": {"name": "data-c02ff4935c975ecafd144f31b3bedfb1"}, "height": 200, "title": "\u041a\u0456\u043b\u044c\u043a\u0456\u0441\u0442\u044c \u043f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a \u043f\u0440\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u0445 \u0432 \u043a\u043e\u0436\u043d\u043e\u043c\u0443 \u043c\u0456\u0441\u044f\u0446\u0456 2019 \u0440\u043e\u043a\u0443", "width": 900, "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json", "datasets": {"data-c02ff4935c975ecafd144f31b3bedfb1": [{"month": 1, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 5914, "\u041c\u0456\u0441\u044f\u0446\u044c": "Ci\u0447\u0435\u043d\u044c"}, {"month": 2, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 8215, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u041b\u044e\u0442\u0438\u0439"}, {"month": 3, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 8973, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0411\u0435\u0440\u0435\u0437\u0435\u043d\u044c"}, {"month": 4, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 9206, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u041a\u0432\u0456\u0442\u0435\u043d\u044c"}, {"month": 5, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 9355, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0422\u0440\u0430\u0432\u0435\u043d\u044c"}, {"month": 6, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 8750, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0427\u0435\u0440\u0432\u0435\u043d\u044c"}, {"month": 7, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 8196, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u041b\u0438\u043f\u0435\u043d\u044c"}, {"month": 8, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 7438, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0421\u0435\u0440\u043f\u0435\u043d\u044c"}, {"month": 9, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 7443, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0412\u0435\u0440\u0435\u0441\u0435\u043d\u044c"}, {"month": 10, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 7353, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0416\u043e\u0432\u0442\u0435\u043d\u044c"}, {"month": 11, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 6267, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u041b\u0438\u0441\u0442\u043e\u043f\u0430\u0434"}, {"month": 12, "\u041f\u0435\u0440\u0435\u0432\u0456\u0440\u043e\u043a": 9520, "\u041c\u0456\u0441\u044f\u0446\u044c": "\u0413\u0440\u0443\u0434\u0435\u043d\u044c"}]}};
+      var embedOpt = {"actions": false, "mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
