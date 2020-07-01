@@ -140,8 +140,8 @@ class BertModel:
         with open(output_f, 'wb') as handle:
             pickle.dump(dict_to_write, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-    def load_models(self, path=DATAPATH, model_1='model_dump2020-06-29_18-24-52',
-                    model_2='model_2_dump2020-06-29_18-26-12'):
+    def load_models(self, path=DATAPATH, model_1='model_1',
+                    model_2='model_2'):
         """
         Load previously trained models for further usage.
         :param path: string, path of data

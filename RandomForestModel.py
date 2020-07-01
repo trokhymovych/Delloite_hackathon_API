@@ -23,7 +23,7 @@ class RandomForestModel:
         self.X = None
         self.y = None
 
-    def load_data(self, filename = 'train_bert_7.pickle'):
+    def load_data(self, filename = 'train_bert_7.pkl'):
         """
         Loading training data in format on pickle file. The file
         containing stacked embeddings from bert in form of pandas DataFrame

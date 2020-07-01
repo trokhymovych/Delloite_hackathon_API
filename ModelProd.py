@@ -32,13 +32,13 @@ class ModelProd:
                                               'accepted_function':[af],
                                               'rejected_function':[rf],
                                               'accepted_product':[ap],
-                                              'rejected_product':[rp]})
+                                              'rejected_product':[rp],
+                                              'target': [0]})
         self.preprocess.process_text()
         emb = self.bert.model_encode(self.preprocess.train.values[0,0],
                                      self.preprocess.train.values[0,1],
                                      self.preprocess.train.values[0,2],
                                      self.preprocess.train.values[0,3],
                                      self.preprocess.train.values[0,4])
-        print(emb)
         pred = self.rf.model_predict_one(emb)
         return pred
