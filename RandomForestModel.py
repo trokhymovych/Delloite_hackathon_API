@@ -13,9 +13,6 @@ import pandas as pd
 
 DATAPATH = 'data/'
 RANDOM_SEED = 42
-DUMP_PATH = os.path.join(DATAPATH, 'data.pkl')
-USE_DUMPED_DATA = True
-USE_SCALER = True
 
 class RandomForestModel:
     def __init__(self,):
@@ -27,6 +24,12 @@ class RandomForestModel:
         self.y = None
 
     def load_data(self, filename = 'train_bert_7.pickle'):
+        """
+        Loading training data in format on pickle file. The file
+        containing stacked embeddings from bert in form of pandas DataFrame
+        :param filename: filename
+        :return:
+        """
         with open(DATAPATH+filename, 'rb') as handle:
             train_bert = pickle.load(handle)
 
@@ -36,9 +39,34 @@ class RandomForestModel:
         self.columns_1 = train_bert['columns_1']
         self.columns_2 = train_bert['columns_2']
 
+    def save_models(self,):
+        """
+        Save pretrained models in format of .pkl file for further usage
+        :return:
+        """
+        dict_to_save = {'m1':self.model1, 'm2':self.model2, 'c1':self.columns_1, 'c2':self.columns_2}
+        with open(DATAPATH+'rf_models.pkl', 'wb') as handle:
+            pickle.dump(dict_to_save, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    def load_models(self, path=DATAPATH, model_file = 'rf_models.pkl'):
+        """
+        Loading pretrained models in format of .pkl file for further usage
+        :param path: path where .pkl file is
+        :param model_file: name of .pkl file
+        :return:
+        """
+        with open(path+model_file, 'rb') as handle:
+            dict_to_load = pickle.load(handle)
+        self.model1 = dict_to_load['m1']
+        self.model2 = dict_to_load['m2']
+        self.columns_1 = dict_to_load['c1']
+        self.columns_2 = dict_to_load['c2']
 
     def model_fit(self,):
-
+        """
+        Using loaded training data train two-level RandomForest model.
+        :return:
+        """
         # first level model
         y_1 = self.y.apply(self._first_level_target)
         X_1 = self.X[self.columns_1]
@@ -70,8 +98,13 @@ class RandomForestModel:
         self.model2 = clf2
 
 
-    def model_predict(self, X):
-
+    def model_predict_all(self, X):
+        """
+        Given Dataset in form of pandas Dataframe predict result for each line.
+        DataFrame should contain "id" column for correct work.
+        :param X: pandas Dataframe
+        :return:
+        """
         # first level model
         X_1 = X[self.columns_1]
 
@@ -96,6 +129,32 @@ class RandomForestModel:
         res.index = res.id
 
         return res.loc[X.id.values, 'target'].values
+
+    def model_predict_one(self, X):
+        """
+        Given Dataset in form of pandas Dataframe that have only one line predict result for it
+        DataFrame should NOT contain "id" column for correct work.
+        :param X: pandas Dataframe
+        :return:
+        """
+        # first level model
+        X_1 = X[self.columns_1]
+
+        pred = self.model1.predict(X_1)
+
+        if pred[0] == 0:
+            return 0
+
+        else:
+            # second level model
+            X_2 = X[self.columns_2]
+
+            pred2 = self.model2.predict(X_2)
+
+            if pred2 == 1:
+                return 1
+            else:
+                return 2
 
     @staticmethod
     def _weighted_accuracy(y_true, y_pred):

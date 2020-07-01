@@ -46,7 +46,7 @@ class BertPreprocess:
             self.train["clear_text"] = self.train["text"].apply(self._make_list_of_texts)
             self.train["text"] = self.train.clear_text.apply(self._combine_sentences)
             self.train = self.train[["text", "accepted_function", "rejected_function",
-                                     "accepted_product", "rejected_product", "target"]]
+                                     "accepted_product", "rejected_product"]]
             for col in self.train.columns[:-1]:
                 self.train[col] = self.train[col].apply(self._replace_nan)
             Logger.logger.info("[INFO] The trainset is processed.")
