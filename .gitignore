@@ -2,7 +2,7 @@
 logs.log
 submission.csv
 score.txt
-logs/api.log
+
 dump/
 
 company-acceptance-prediction/
