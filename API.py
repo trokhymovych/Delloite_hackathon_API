@@ -36,9 +36,6 @@ m1_response = api.model('ModelResponse', {
     'Answer': fields.String(required=True, description='Answer')
 })
 
-
-
-
 @ns1.route('/')
 class TodoList(Resource):
     """Shows a list of all todos, and lets you POST to add new tasks"""
