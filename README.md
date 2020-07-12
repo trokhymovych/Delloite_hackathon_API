@@ -1,6 +1,6 @@
 # Deloitte NLP hackaton
 
-This repository is done as project for Python Architecture course in UCU 2020. 
+This repository is done as project for Python Architecture course in UCU 2020.
 
 The aim of the project is to make productization of the code developed during 3-days hachathon.
 By the way here is a [link to competition](https://www.kaggle.com/c/company-acceptance-prediction/leaderboard), where we got 2nd place :boom: :tada: :tada:
@@ -11,7 +11,7 @@ Our solution is based on Two-level random forest model based on finetuned bert e
 ### What is done?
 
 - train/predict pipeline implementation
-- Basic code refactoring 
+- Basic code refactoring
 - Modules building
 - Basic project structuring
 - API development
@@ -27,9 +27,15 @@ Our solution is based on Two-level random forest model based on finetuned bert e
 
 ## API for model calls
 ### start api
+Launch API with using ML models
 ```
 python3 API.py
 ```
+Launch API with using dummy model
+```
+python3 API.py dummy
+```
+
 ![alt text](https://github.com/trokhymovych/DelloiteCompanyAcceptance/blob/master/Screenshots/API.png?raw=true)
 
 ## Basic UI for model demo
