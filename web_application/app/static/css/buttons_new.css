@@ -1,0 +1,21 @@
+
+.btn-blue {
+    width: 120px;
+    background-color: #759ee5;
+    color: white;
+    font-size:1.15em;
+}
+.btn-blue:hover {
+  color: white;
+}
+
+.btn-yellow {
+  width: 120px;
+  background-color:#fad978;
+  color: white;
+  font-size:1.15em;
+}
+
+.btn-yellow:hover {
+  color: white;
+}
