@@ -59,7 +59,7 @@ for l in data:
 
 prof_df = pd.DataFrame(content[1:], columns=['ncalls', 'tottime', 'percall', 'cumtime', 'percall2', 'filename:lineno(function)'])
 
-os.system('gprof2dot -n 10  -f pstats data/output.pstats | dot -Tpng -o data/output.png')
+os.system('gprof2dot -n 10  -f pstats data/output.pstats | dot -Tpng -o Screenshots/output.png')
 
 prof_df.sort_values('percall', ascending = False, inplace = True)
 

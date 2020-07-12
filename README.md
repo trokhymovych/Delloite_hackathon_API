@@ -41,3 +41,7 @@ export FLASK_ENV=development
 flask run
 ```
 ![alt text](https://github.com/trokhymovych/DelloiteCompanyAcceptance/blob/master/Screenshots/swagger.jpeg?raw=true)
+
+## Basic code profiling
+##### 
+![alt text](https://github.com/trokhymovych/DelloiteCompanyAcceptance/blob/master/Screenshots/swagger.jpeg?raw=true)
