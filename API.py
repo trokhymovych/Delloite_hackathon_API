@@ -12,6 +12,9 @@ def get_logger(filename):
     log = logging.getLogger(__name__)
     return log
 
+def check_path(path):
+    os.system("if [ ! -d " + path + " ]; then mkdir -p " + path + "; fi")
+
 sys.path.insert(1, os.getcwd()+'/modules')
 
 from datetime import datetime
@@ -19,7 +22,7 @@ from WebScraper import *
 from ModelProd import *
 from ModelProdDummy import *
 
-
+check_path('logs')
 log = get_logger('logs/api.log')
 log.info('Start API')
 
