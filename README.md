@@ -41,3 +41,8 @@ export FLASK_ENV=development
 flask run
 ```
 ![alt text](https://github.com/trokhymovych/DelloiteCompanyAcceptance/blob/master/Screenshots/swagger.jpeg?raw=true)
+
+## Perform basic code profiling
+##### Tree plot that helps to understand which processes are the most time consuming.
+##### Example experiment of running 100 random queries to simulate the real user performance.
+![alt text](https://raw.githubusercontent.com/trokhymovych/DelloiteCompanyAcceptance/master/Screenshots/output.png?raw=true)
