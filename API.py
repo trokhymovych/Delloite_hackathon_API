@@ -1,3 +1,5 @@
+import sys
+
 from typing import Dict, Any
 
 from flask import Flask, request
@@ -5,6 +7,7 @@ from flask_restx import Api, Resource, fields
 
 from WebScraper import *
 from ModelProd import *
+from ModelProdDummy import *
 
 import datetime
 import logging
@@ -17,7 +20,14 @@ log = get_logger('api.log')
 log.info('Start API')
 
 scrapper = WebScraper()
-model = ModelProd()
+
+
+if len(sys.argv)>1:
+    print("Dummy model")
+    model = ModelProdDummy()
+else:
+    print("Production model")
+    model = ModelProd()
 model.load_pretrained()
 
 app = Flask(__name__)
@@ -66,11 +76,13 @@ class TodoList(Resource):
 
         log.info('Model Get request; params={"company_page":"'+company_page+'", "accepted_function":"'+accepted_function+'", "rejected_function":"'+rejected_function+'", "accepted_product":"'+accepted_product+'","rejected_product":"'+rejected_product+'"}')
 
-        print(accepted_function)
-        print(rejected_function)
+        print("accepted_function: ", accepted_function)
+        print("rejected_function: ", rejected_function)
+        print("accepted_product: ", accepted_product)
+        print("rejected_product: ", rejected_product)
 
         result = model.predict(text, accepted_function, rejected_function, accepted_product, rejected_product)
-        print(result)
+        print("result from model: ", result)
         end_time = datetime.datetime.now()
         dif_time = str(end_time-start_time)
         log.info('Model Get response => '+str(result)+' dif_time='+dif_time)

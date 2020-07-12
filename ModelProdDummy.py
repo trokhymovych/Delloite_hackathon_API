@@ -26,4 +26,4 @@ class ModelProdDummy:
         :param rp: string
         :return:
         """
-        return 1
+        return 2
