@@ -74,8 +74,6 @@ class TodoList(Resource):
         company_page = check_if_None(request.args.get('company_page'))
         text = scrapper.get_text_from_web_page(company_page)
 
-        print(text)
-
         accepted_function = check_if_None(request.args.get('accepted_function'))
         rejected_function = check_if_None(request.args.get('rejected_function'))
         accepted_product = check_if_None(request.args.get('accepted_product'))
