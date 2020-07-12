@@ -3,6 +3,8 @@ logs.log
 submission.csv
 score.txt
 
+logs/
+logs/logs.log
 dump/
 
 company-acceptance-prediction/

@@ -1,22 +1,26 @@
 import sys
+import os
 
 from typing import Dict, Any
 
 from flask import Flask, request
 from flask_restx import Api, Resource, fields
 
-from WebScraper import *
-from ModelProd import *
-from ModelProdDummy import *
-
-import datetime
 import logging
 def get_logger(filename):
     logging.basicConfig(filename=filename, filemode='w', format="%(asctime)s [%(levelname)s] %(message)s", level=logging.INFO)
     log = logging.getLogger(__name__)
     return log
 
-log = get_logger('api.log')
+sys.path.insert(1, os.getcwd()+'/modules')
+
+from datetime import datetime
+from WebScraper import *
+from ModelProd import *
+from ModelProdDummy import *
+
+
+log = get_logger('logs/api.log')
 log.info('Start API')
 
 scrapper = WebScraper()
@@ -62,7 +66,7 @@ class TodoList(Resource):
         """Process request"""
         # print(api.payload)
 
-        start_time = datetime.datetime.now()
+        start_time = datetime.now()
 
         company_page = check_if_None(request.args.get('company_page'))
         text = scrapper.get_text_from_web_page(company_page)
@@ -83,7 +87,7 @@ class TodoList(Resource):
 
         result = model.predict(text, accepted_function, rejected_function, accepted_product, rejected_product)
         print("result from model: ", result)
-        end_time = datetime.datetime.now()
+        end_time = datetime.now()
         dif_time = str(end_time-start_time)
         log.info('Model Get response => '+str(result)+' dif_time='+dif_time)
 

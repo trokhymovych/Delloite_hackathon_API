@@ -16,14 +16,14 @@ Our solution is based on Two-level random forest model based on finetuned bert e
 - Basic project structuring
 - API development
 - UI development
-
-### ToDo:
 - set up virtual environment with predefined requirements
-- tests suite implementation
+- super basic tests suite implementation (just to figure out how to do it)
 - finish project structuring
 - code profiling
-- ... to be discussed
+- Added "testing" mode to test project with dummy model (to test is run ```python3 API.py dummy```)
 
+### ToDo
+- CI/CD pipeline
 
 ## API for model calls
 ### start api
@@ -45,4 +45,5 @@ flask run
 ## Perform basic code profiling
 ##### Tree plot that helps to understand which processes are the most time consuming.
 ##### Example experiment of running 100 random queries to simulate the real user performance.
+
 ![alt text](https://raw.githubusercontent.com/trokhymovych/DelloiteCompanyAcceptance/master/Screenshots/output.png?raw=true)

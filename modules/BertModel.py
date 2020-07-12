@@ -14,7 +14,7 @@ import re
 from BertDataReader import DataReader
 from log_conf import Logger
 
-DATAPATH = 'data/'
+DATAPATH = '../data/'
 
 
 class BertModel:

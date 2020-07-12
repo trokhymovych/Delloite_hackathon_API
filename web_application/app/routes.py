@@ -27,7 +27,7 @@ from app.functions_for_UI import *
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('main.html', title='Welcome', dict_for_search={}, show_evaluate_button=False, answer_dict={})
+        return render_input_form()
 
     elif request.method == 'POST':
 
@@ -41,12 +41,21 @@ def index():
         show_evaluate_button = check_if_valid_company_web_page(dict_for_search["company_page"])
 
         if request.form['btn'] != "Evaluate":
-            return render_template('main.html', title='Welcome', dict_for_search=dict_for_search, show_evaluate_button=show_evaluate_button, answer_dict={})
+            return render_input_form_with_company_page_preview(dict_for_search, show_evaluate_button)
         else:
             answer_dict = make_request_for_API(dict_for_search)
-        return render_template('main.html', title='Welcome', dict_for_search=dict_for_search, show_evaluate_button=show_evaluate_button, answer_dict=answer_dict)
+            return render_full_evaluate_form(dict_for_search, show_evaluate_button, answer_dict)
     else:
         raise ValueError('Unexpected request method')
+
+def render_input_form():
+    return render_template('main.html', dict_for_search={}, show_evaluate_button=False, answer_dict={})
+
+def render_input_form_with_company_page_preview(dict_for_search, show_evaluate_button):
+    return render_template('main.html', dict_for_search=dict_for_search, show_evaluate_button=show_evaluate_button, answer_dict={})
+
+def render_full_evaluate_form(dict_for_search, show_evaluate_button, answer_dict):
+    return render_template('main.html',  dict_for_search=dict_for_search, show_evaluate_button=show_evaluate_button, answer_dict=answer_dict)
 
 
 @app.after_request

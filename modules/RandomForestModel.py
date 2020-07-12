@@ -11,7 +11,7 @@ from sklearn import preprocessing
 import numpy as np
 import pandas as pd
 
-DATAPATH = 'data/'
+DATAPATH = '../data/'
 RANDOM_SEED = 42
 
 class RandomForestModel:

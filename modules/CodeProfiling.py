@@ -38,7 +38,7 @@ ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
 ps.print_stats()
 
 # dumping results
-filename = 'data/output.pstats'
+filename = '../data/output.pstats'
 pr.dump_stats(filename)
 
 ## getting dataframe from results

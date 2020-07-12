@@ -8,7 +8,7 @@ from log_conf import Logger
 import spacy
 from spacy.lang.en import English
 
-DATAPATH = 'data/'
+DATAPATH = '../data/'
 
 class BertPreprocess:
 
