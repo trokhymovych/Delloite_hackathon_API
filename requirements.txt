@@ -22,7 +22,7 @@ beautifulsoup4 == 4.6.3
 category_encoders == 2.1.0
 
 # deloitte/API.py: 4
-flask_restx == 0.2.0
+flask_restx == 0.5.1
 
 # deloitte/notebooks/Benchmark+Validation.ipynb: 2
 # deloitte/research/Pipeline.ipynb: 2
