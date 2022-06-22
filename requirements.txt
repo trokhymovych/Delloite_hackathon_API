@@ -35,7 +35,7 @@ matplotlib == 3.2.2
 # deloitte/research/Pipeline.ipynb: 4
 # deloitte/utils.py: 3
 # deloitte/web_application/app/routes.py: 5
-numpy == 1.18.1
+numpy == 1.22.0
 
 # deloitte/.ipynb_checkpoints/Make_datasets-checkpoint.ipynb: 1
 # deloitte/BertModel.py: 1
